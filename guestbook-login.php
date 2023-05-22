@@ -1,6 +1,28 @@
 <?php
-  
+  require('config/config.php');
+  require('config/db.php');
+  if(isset($_POST['submit'])){
+    
+    if ( !empty($_POST['username']) && !empty($_POST['password'])) {
 
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+      $result= $conn->query("SELECT * FROM account WHERE username='$username' AND password='$password'"); 
+
+      $row= $result ->Fetch_array();
+      $loginCheck= $result-> num_rows;
+  
+      if($loginCheck> 0)
+      {
+        header("Location: guestbook-list.php");
+      }
+  
+      else
+      {
+       echo "User credentials are invalid ";
+      }
+  }
+  }
 
 
 ?>
